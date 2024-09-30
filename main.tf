@@ -22,7 +22,7 @@ resource "digitalocean_droplet" "web" {
   name   = "web-1"
   region = "nyc2"
   size   = "s-1vcpu-1gb"
-  ssh_keys = [ "d8:12:71:73:51:04:82:fc:f8:4e:9d:48:74:35:c1:30" ]
+  ssh_keys = [ secrets.DROPLET_IP ]
 }
 
 resource "digitalocean_firewall" "web" {
