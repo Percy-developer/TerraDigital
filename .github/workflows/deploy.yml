@@ -21,7 +21,10 @@ jobs:
     - name: Deploy to DigitalOcean
       run: |
         ssh root@${{ secrets.DROPLET_IP }} << 'EOF'
-        cd /var/www/html/ProyectoTest
-        git pull origin main
-        cp -R /var/www/html/ProyectoTest/* /var/www/html/ # Copia tu proyecto
+        mkdir -p /var/www/html/ProyectoTest
+        if [ ! -d "/var/www/html/ProyectoTest/.git" ]; then
+          git clone https://github.com/Percy-developer/TerraDigital.git /var/www/html/ProyectoTest;
+        else
+          cd /var/www/html/ProyectoTest && git pull origin main;
+        fi
         EOF
